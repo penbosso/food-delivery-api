@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.send({ message: 'Food delivery API works!'});
 });
 
-app.use('/users', require('./router/userRouter'));
+app.use('/users', require('./router/user-router'));
 
 // error handler. 
 app.use(errorHandler);

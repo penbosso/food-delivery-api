@@ -3,7 +3,7 @@ const router = express.Router();
 const Joi = require('joi');
 const validateRequest = require('../middleware/validate-request');
 const authorize = require('../middleware/authorize')
-const userController = require('../controller/userController');
+const userController = require('../controller/user-controller');
 
 // routes
 router.post('/authenticate', authenticateSchema, authenticate);
