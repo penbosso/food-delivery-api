@@ -10,5 +10,5 @@ function model(sequelize) {
     };
 
 
-    return sequelize.define('Restaurant', attributes);
+    return sequelize.define('Order', attributes);
 }
