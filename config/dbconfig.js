@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const databaseConfig = {
     "host": process.env.DB_HOST,
     "port": process.env.DB_PORT,
@@ -6,4 +8,4 @@ const databaseConfig = {
     "database": process.env.DB_NAME
 }
 
-export default databaseConfig
+module.exports = databaseConfig

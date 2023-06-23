@@ -1,4 +1,4 @@
-import { databaseConfig } from './config/dbconfig'
+const databaseConfig = require('./config/dbconfig');
 const mysql = require('mysql2/promise');
 const { Sequelize } = require('sequelize');
 
@@ -16,24 +16,21 @@ async function initialize() {
     const sequelize = new Sequelize(database, user, password, { host: host, dialect: 'mysql' });
 
     // init models and add them to the exported db object
-    db.User = require('./model/user').default(sequelize);
+    db.User = require('./model/user')(sequelize);
     db.Order = require('./model/order')(sequelize);
-    db.Menu_Item = require('./model/menu_item').default(sequelize);
+    db.Menu_Item = require('./model/menu_item')(sequelize);
     db.Restaurant = require('./model/restaurant')(sequelize);
 
 
     // associations
-    db.User.hasMany(db.Orders);
+    db.User.hasMany(db.Order);
     db.Order.belongsTo(db.User);
 
-    db.Menu_Item.hasMany(db.Orders);
+    db.Menu_Item.hasMany(db.Order);
     db.Order.belongsTo(db.Menu_Item);
     
     db.Restaurant.hasMany(db.User);
-    db.User.belongsTo(db.Restaurant,{
-        foreignKey: {
-            allowNull: true,
-        }});
+    db.User.belongsTo(db.Restaurant);
     
     db.Restaurant.hasMany(db.Menu_Item);
     db.Menu_Item.belongsTo(db.Restaurant);

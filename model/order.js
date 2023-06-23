@@ -1,6 +1,6 @@
-import { DataTypes } from 'sequelize';
+const { DataTypes } = require('sequelize');
 
-export default model;
+module.exports = model;
 
 function model(sequelize) {
     const attributes = {
@@ -10,5 +10,5 @@ function model(sequelize) {
     };
 
 
-    return sequelize.define('Restaurant', attributes, options);
+    return sequelize.define('Restaurant', attributes);
 }
