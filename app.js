@@ -5,7 +5,9 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 require('dotenv').config();
 const fs = require('fs');
-const userController = require('./controller/userController');
+const errorHandler = require('./middleware/error-handler');
+
+
 const app = express();
 app.use(helmet());
 app.use(bodyParser.json());
@@ -17,11 +19,13 @@ app.use(morgan('combined'));
 
 // api routes.
 app.get('/', (req, res) => {
-  res.send({ title: 'Food delivery API works!'});
+  res.send({ message: 'Food delivery API works!'});
 });
 
-app.use('/register', userController.createUser);
-app.use('/users', userController.getAllUsers);
+app.use('/users', require('./router/userRouter'));
+
+// error handler. 
+app.use(errorHandler);
 
 const port = (process.env.PORT || 4000);
 app.listen(port, () => console.log('Server listening on port ' + port));
