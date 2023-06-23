@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+require('dotenv').config();
 
 module.exports = model;
 
@@ -6,7 +7,8 @@ function model(sequelize) {
     const attributes = {
         restaurant_id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
         restaurant_name: { type: DataTypes.STRING, allowNull: false },
-        image_url: { type: DataTypes.STRING, defaultValue: "pending" }
+        status: { type: DataTypes.STRING, defaultValue: "opened"  },
+        image_url: { type: DataTypes.STRING, defaultValue: process.env.RESTAURANT_IMAGE_PLACEHOLDER }
     };
 
 

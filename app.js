@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', require('./router/user-router'));
+app.use('/restaurants', require('./router/restaurant-router'));
 
 // error handler. 
 app.use(errorHandler);
