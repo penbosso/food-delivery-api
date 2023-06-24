@@ -61,14 +61,19 @@ const getAllMenu_item = (req, res, next) => {
 }
 
 /**
- * update a menu_item.
+ * update a menu_item or filter by restaurant id.
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
  * @param {Function} next - The next middleware function.
  */
 const updateMenu_item = (req, res, next) => {
+    if (req.query.restaurant) {
+        return menu_itemController.getAllByRestaurantId(req.query.restaurant)
+            .then(menu_items => res.json(menu_items))
+            .catch(next);
+    }
     menu_itemController.update(req.params.id, req.body)
-        .then(menu_item => res.json(menu_item))
+        .then(menu_items => res.json(menu_items))
         .catch(next);
 }
 

@@ -21,6 +21,14 @@ const getAll = async () => {
 }
 
 /**
+ * Retrieves all orders filtered by restaurant id.
+ * @returns {Promise} A promise that resolves to an array of order objects.
+ */
+const getAllByRestaurantId = async () => {
+    return await db.Order.findAll({ where: { restaurant_id: id }, include: [db.User, db.Menu_item] });
+}
+
+/**
  * Creates a new order.
  * @param {Object} params - The parameters for creating a new order.
  * @returns {Promise} A promise that resolves when the order is created.
@@ -59,12 +67,13 @@ const _delete = async (id) => {
  * @throws {string} Throws an error if the order is not found.
  */
 const getOrder = async (id) => {
-    const order = await db.Order.findByPk(id,{ include: [db.User, db.Menu_item] });
+    const order = await db.Order.findByPk(id, { include: [db.User, db.Menu_item] });
     if (!order) throw 'Order not found';
     return order;
 }
 
 module.exports = {
+    getAllByRestaurantId,
     getAll,     // Function to retrieve all orders
     getById,    // Function to retrieve an order by ID
     create,     // Function to create a new order

@@ -32,6 +32,9 @@ async function initialize() {
     db.Restaurant.hasMany(db.User);
     db.User.belongsTo(db.Restaurant, {  foreignKey: { name: 'restaurant_id' } });
     
+    db.Restaurant.hasMany(db.Order);
+    db.Order.belongsTo(db.Restaurant, {  foreignKey: { name: 'restaurant_id' } });
+
     db.Restaurant.hasMany(db.Menu_item);
     db.Menu_item.belongsTo(db.Restaurant, {  foreignKey: { name: 'restaurant_id' } });
 

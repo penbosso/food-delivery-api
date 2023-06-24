@@ -63,12 +63,17 @@ const register = (req, res, next) => {
 };
 
 /**
- * Retrieves all users.
+ * Retrieves all users or filter by restaurant id.
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
  * @param {Function} next - The next middleware function.
  */
 const getAll = (req, res, next) => {
+    if (req.query.restaurant) {
+        return userController.getAllByRestaurantId()
+            .then(users => res.json(users))
+            .catch(next);
+    }
     userController.getAll()
         .then(users => res.json(users))
         .catch(next);

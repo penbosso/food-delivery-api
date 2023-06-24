@@ -35,6 +35,14 @@ const getAll = async () => {
 };
 
 /**
+ * Retrieves all orders filtered by restaurant id.
+ * @returns {Promise} A promise that resolves to an array of order objects.
+ */
+const getAllByRestaurantId = async () => {
+    return await db.User.findAll({ where: { restaurant_id: id } });
+}
+
+/**
  * Retrieves a user by their ID.
  * @param {number} id - The ID of the user.
  * @returns {Promise} A promise that resolves to the user object.
@@ -125,6 +133,7 @@ const omitHash = (user) => {
 }
 
 module.exports = {
+    getAllByRestaurantId,
     authenticate, // authenticate user
     getAll, // retrieve all users
     getById, // retrieve a user by id

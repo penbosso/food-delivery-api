@@ -13,13 +13,20 @@ const getById = async (id) => {
 }
 
 /**
+ * Retrieves all menu_items filtered by restaurant id
+ * @returns {Promise} A promise that resolves to an array of menu_item objects.
+ */
+const getAllByRestaurantId = async (id) => {
+    return await db.Menu_item.findAll({where:{restaurant_id: id}});
+}
+
+/**
  * Retrieves all menu_items.
  * @returns {Promise} A promise that resolves to an array of menu_item objects.
  */
 const getAll = async () => {
     return await db.Menu_item.findAll();
 }
-
 /**
  * Creates a new menu_item.
  * @param {Object} params - The parameters for creating a new menu_item.
@@ -65,6 +72,7 @@ const getMenu_item = async (id) => {
 }
 
 module.exports = {
+    getAllByRestaurantId,
     getAll,     // Function to retrieve all menu_items
     getById,    // Function to retrieve a menu_item by ID
     create,     // Function to create a new menu_item
