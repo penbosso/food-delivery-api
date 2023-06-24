@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
-const authorize = require('../middleware/authorize')
+const { authorize, authorizeRestaurantOwner } = require('../middleware/authorize')
 const validateRequest = require('../middleware/validate-request');
 const restaurantController = require('../controller/restaurant-controller');
 
@@ -45,7 +45,7 @@ const getRestaurantById = (req, res, next) => {
         .catch(next);
 };
 
-const getAllRestaurant = (req, res, next) => {
+const getAllRestaurant = (req, res, next) => { console.log('*********', req)
     restaurantController.getAll()
         .then(restaurants => res.json(restaurants))
         .catch(next);
@@ -66,10 +66,9 @@ const deleteRestaurant = (req, res, next) => {
 // Routes
 router.get('/', getAllRestaurant);
 router.post('/', restaurantSchema, createRestaurant);
-router.put('/:id', updateRestaurant);
 router.get('/:id', getRestaurantById);
-router.put('/:id', restaurantSchema, updateRestaurant);
-router.delete('/:id', authorize(), deleteRestaurant);
+router.put('/:id',restaurantSchema, authorizeRestaurantOwner, updateRestaurant);
+router.delete('/:id', authorize(), authorizeRestaurantOwner, deleteRestaurant);
 
 module.exports = router;
 

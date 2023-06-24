@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
-const authorize = require('../middleware/authorize')
+const { authorize, authorizeRestaurantOwner } = require('../middleware/authorize')
 const validateRequest = require('../middleware/validate-request');
 const orderController = require('../controller/order-controller');
 
@@ -85,10 +85,9 @@ const deleteOrder = (req, res, next) => {
 // Routes
 router.get('/', getAllOrder);
 router.post('/', orderSchema, createOrder);
-router.put('/:id', updateOrder);
 router.get('/:id', getOrderById);
-router.put('/:id', orderSchema, updateOrder);
-router.delete('/:id', authorize(), deleteOrder);
+router.put('/:id', orderSchema, authorizeRestaurantOwner, updateOrder);
+router.delete('/:id', authorize(), authorizeRestaurantOwner, deleteOrder);
 
 module.exports = router;
 

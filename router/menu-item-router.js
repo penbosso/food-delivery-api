@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
-const authorize = require('../middleware/authorize')
+const { authorize, authorizeRestaurantOwner } = require('../middleware/authorize')
 const validateRequest = require('../middleware/validate-request');
 const menu_itemController = require('../controller/menu-item-controller');
 
@@ -87,10 +87,9 @@ const deleteMenu_item = (req, res, next) => {
 // Routes
 router.get('/', getAllMenu_item);
 router.post('/', menu_itemSchema, createMenu_item);
-router.put('/:id', updateMenu_item);
 router.get('/:id', getMenu_itemById);
-router.put('/:id', menu_itemSchema, updateMenu_item);
-router.delete('/:id', authorize(), deleteMenu_item);
+router.put('/:id', menu_itemSchema, authorizeRestaurantOwner(), updateMenu_item);
+router.delete('/:id', authorize(), authorizeRestaurantOwner(), deleteMenu_item);
 
 module.exports = router;
 

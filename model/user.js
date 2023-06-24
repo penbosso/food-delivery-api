@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const  ROLES_LIST = require('../config/roles_list');
 
 module.exports = model;
 
@@ -9,7 +10,7 @@ function model(sequelize) {
         last_name: { type: DataTypes.STRING, allowNull: false },
         telephone: { type: DataTypes.STRING, allowNull: false  },
         status: { type: DataTypes.STRING, defaultValue: "not varified"  },
-        role: { type: DataTypes.STRING, defaultValue: "1"  },
+        role: { type: DataTypes.STRING, defaultValue: ROLES_LIST.User  },
         password: { type: DataTypes.STRING, allowNull: false},
         refress_token: { type: DataTypes.STRING}
     };

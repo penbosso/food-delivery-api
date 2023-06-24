@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
 const validateRequest = require('../middleware/validate-request');
-const authorize = require('../middleware/authorize')
+const { authorize, authorizeOwner } = require('../middleware/authorize')
 const userController = require('../controller/user-controller');
 
 /**
@@ -110,9 +110,9 @@ const updateSchema = (req, res, next) => {
 *@param {Function} next - The next middleware function.
 */
 const update = (req, res, next) => {
-userController.update(req.params.id, req.body)
-.then(user => res.json(user))
-.catch(next);
+    userController.update(req.params.id, req.body)
+        .then(user => res.json(user))
+        .catch(next);
 };
 /**
 
@@ -122,17 +122,17 @@ Deletes a user.
 @param {Function} next - The next middleware function.
 */
 const _delete = (req, res, next) => {
-userController.delete(req.params.id)
-.then(() => res.json({ message: 'User deleted successfully' }))
-.catch(next);
+    userController.delete(req.params.id)
+        .then(() => res.json({ message: 'User deleted successfully' }))
+        .catch(next);
 };
 
 // Routes
 router.post('/authenticate', authenticateSchema, authenticate);
 router.post('/register', addUserSchema, register);
 router.get('/', getAll);
-router.get('/:id', authorize(), getById);
-router.put('/:id', authorize(), updateSchema, update);
-router.delete('/:id', authorize(), _delete);
+router.get('/:id', authorize(), authorizeOwner(), getById);
+router.put('/:id', authorize(), updateSchema, authorizeOwner(), update);
+router.delete('/:id', authorize(), authorizeOwner(), _delete);
 
 module.exports = router;
