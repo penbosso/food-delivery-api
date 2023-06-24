@@ -17,7 +17,7 @@ app.use(cors({ credentials: true, origin: true, }));
 app.use(morgan('combined', {
     stream: fs.createWriteStream('./logs/access.log', { flags: 'a' })
 }));
-
+app.use(morgan('combined'))
 // api routes.
 app.get('/', (req, res) => {
     res.send({ message: 'Food delivery API works!' });

@@ -45,7 +45,8 @@ const getRestaurantById = (req, res, next) => {
         .catch(next);
 };
 
-const getAllRestaurant = (req, res, next) => { console.log('*********', req)
+const getAllRestaurant = (req, res, next) => {
+    console.log('*********', req)
     restaurantController.getAll()
         .then(restaurants => res.json(restaurants))
         .catch(next);
@@ -67,8 +68,8 @@ const deleteRestaurant = (req, res, next) => {
 router.get('/', getAllRestaurant);
 router.post('/', restaurantSchema, createRestaurant);
 router.get('/:id', getRestaurantById);
-router.put('/:id',restaurantSchema, authorizeRestaurantOwner, updateRestaurant);
-router.delete('/:id', authorize(), authorizeRestaurantOwner, deleteRestaurant);
+router.put('/:id', restaurantSchema, authorize(), authorizeRestaurantOwner(), updateRestaurant);
+router.delete('/:id', authorize(), authorizeRestaurantOwner(), deleteRestaurant);
 
 module.exports = router;
 

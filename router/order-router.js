@@ -92,8 +92,8 @@ const deleteOrder = (req, res, next) => {
 router.get('/', getAllOrder);
 router.post('/', orderSchema, createOrder);
 router.get('/:id', getOrderById);
-router.put('/:id', orderSchema, authorizeRestaurantOwner, updateOrder);
-router.delete('/:id', authorize(), authorizeRestaurantOwner, deleteOrder);
+router.put('/:id', orderSchema, authorize(), authorizeRestaurantOwner(), updateOrder);
+router.delete('/:id', authorize(), authorizeRestaurantOwner(), deleteOrder);
 
 module.exports = router;
 

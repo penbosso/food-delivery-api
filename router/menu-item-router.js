@@ -93,7 +93,7 @@ const deleteMenu_item = (req, res, next) => {
 router.get('/', getAllMenu_item);
 router.post('/', menu_itemSchema, createMenu_item);
 router.get('/:id', getMenu_itemById);
-router.put('/:id', menu_itemSchema, authorizeRestaurantOwner(), updateMenu_item);
+router.put('/:id', menu_itemSchema, authorize(), authorizeRestaurantOwner(), updateMenu_item);
 router.delete('/:id', authorize(), authorizeRestaurantOwner(), deleteMenu_item);
 
 module.exports = router;

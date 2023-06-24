@@ -38,7 +38,7 @@ const authorizeOwner = () => {
 // authorize restaurant owner or admin
 const authorizeRestaurantOwner = () => {
     return (req, res, next) => {
-        if (req.user.role == ROLES_LIST.Admin) return next();
+        if (req?.user?.role == ROLES_LIST.Admin) return next();
         if (req.baseUrl == '/restaurants') {
             if (req?.user?.restaurant_id !== req?.params?.id) return res.sendStatus(401);
         } else {
