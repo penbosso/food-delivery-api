@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
 const validateRequest = require('../middleware/validate-request');
-const { authorize, authorizeOwner } = require('../middleware/authorize')
+const { authorize, authorizeOwner, authorizeRole } = require('../middleware/authorize')
 const userController = require('../controller/user-controller');
+const ROLES_LIST = require('../config/roles_list');
 
 /**
  * Middleware function to validate the request body for the authentication endpoint.
@@ -139,7 +140,7 @@ const _delete = (req, res, next) => {
 // Routes
 router.post('/authenticate', authenticateSchema, authenticate);
 router.post('/register', addUserSchema, register);
-router.get('/', getAll);
+router.get('/', authorize(), authorizeRole(ROLES_LIST.Admin), getAll);
 router.get('/:id', authorize(), authorizeOwner(), getById);
 router.put('/:id', authorize(), updateSchema, authorizeOwner(), update);
 router.delete('/:id', authorize(), authorizeOwner(), _delete);

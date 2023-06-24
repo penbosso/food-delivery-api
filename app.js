@@ -33,14 +33,11 @@ app.use('/orders', require('./router/order-router'));
 // for uploading restaurant and menu item images
 app.post('/upload', upload.single('image'), (req, res) => {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+        return res.status(400).json({ error: 'No file uploaded' });
     }
     const filename = req.file.filename;
-    const originalname = req.file.originalname;
-    const mimetype = req.file.mimetype;
-    const size = req.file.size;
-    res.json({ filename, originalname, mimetype, size });
-  });
+    res.json({ image_url: 'upload/'+filename });
+});
 
 // error handler. 
 app.use(errorHandler);
