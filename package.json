@@ -1,0 +1,43 @@
+{
+  "name": "food-delivery-api",
+  "version": "1.0.0",
+  "description": "API for a sipmle food delivery app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./app.js",
+    "dev": "nodemon ./app.js",
+    "test": "mocha --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/penbosso/food-delivery-api.git"
+  },
+  "author": "penbosso",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/penbosso/food-delivery-api/issues"
+  },
+  "homepage": "https://github.com/penbosso/food-delivery-api#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "chai": "^4.3.7",
+    "chai-http": "^4.4.0",
+    "cors": "^2.8.5",
+    "date-fns": "^2.30.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-jwt": "^8.4.1",
+    "helmet": "^7.0.0",
+    "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.4.0",
+    "sequelize": "^6.32.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22"
+  }
+}
