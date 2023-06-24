@@ -18,22 +18,22 @@ async function initialize() {
     // init models and add them to the exported db object
     db.User = require('./model/user')(sequelize);
     db.Order = require('./model/order')(sequelize);
-    db.Menu_Item = require('./model/menu_item')(sequelize);
+    db.Menu_item = require('./model/menu_item')(sequelize);
     db.Restaurant = require('./model/restaurant')(sequelize);
 
 
     // associations
     db.User.hasMany(db.Order);
-    db.Order.belongsTo(db.User);
+    db.Order.belongsTo(db.User, {  foreignKey: { name: 'user_id' } });
 
-    db.Menu_Item.hasMany(db.Order);
-    db.Order.belongsTo(db.Menu_Item);
+    db.Menu_item.hasMany(db.Order);
+    db.Order.belongsTo(db.Menu_item, {  foreignKey: { name: 'menu_item_id' } });
     
     db.Restaurant.hasMany(db.User);
-    db.User.belongsTo(db.Restaurant);
+    db.User.belongsTo(db.Restaurant, {  foreignKey: { name: 'restaurant_id' } });
     
-    db.Restaurant.hasMany(db.Menu_Item);
-    db.Menu_Item.belongsTo(db.Restaurant);
+    db.Restaurant.hasMany(db.Menu_item);
+    db.Menu_item.belongsTo(db.Restaurant, {  foreignKey: { name: 'restaurant_id' } });
 
     // sync all models with database {force: true}
     await sequelize.sync({ alter: true });
