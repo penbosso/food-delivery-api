@@ -17,6 +17,7 @@ const restaurantSchema = (req, res, next) => {
         restaurant_name: Joi.string().required(),
         status: Joi.string().allow(''),
         image_url: Joi.string().allow(''),
+        location: Joi.string().allow(''),
     });
     validateRequest(req, next, schema);
 };

@@ -89,9 +89,9 @@ const deleteOrder = (req, res, next) => {
 }
 
 // Routes
-router.get('/', getAllOrder);
-router.post('/', orderSchema, createOrder);
-router.get('/:id', getOrderById);
+router.get('/', authorize(), authorizeRestaurantOwner(), getAllOrder);
+router.post('/', orderSchema, authorize(), createOrder);
+router.get('/:id',authorize(), getOrderById);
 router.put('/:id', orderSchema, authorize(), authorizeRestaurantOwner(), updateOrder);
 router.delete('/:id', authorize(), authorizeRestaurantOwner(), deleteOrder);
 

@@ -43,6 +43,7 @@ const addUserSchema = (req, res, next) => {
         last_name: Joi.string().required(),
         telephone: Joi.string().required(),
         status: Joi.string().allow(''),
+        location: Joi.string().allow(''),
         role: Joi.string().allow(''),
         RestaurantRestaurantId: Joi.number().allow(''),
         refresh_token: Joi.string().allow(''),
@@ -105,6 +106,7 @@ const updateSchema = (req, res, next) => {
         telephone: Joi.string().required(),
         status: Joi.string().allow(''),
         role: Joi.string().allow(''),
+        location: Joi.string().allow(''),
         restaurant_id: Joi.number().allow(''),
         refresh_token: Joi.string().allow(''),
         password: Joi.string().min(6).allow('')

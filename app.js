@@ -6,7 +6,10 @@ const morgan = require('morgan');
 require('dotenv').config();
 const fs = require('fs');
 const errorHandler = require('./middleware/error-handler');
+const multer = require('multer');
+const path = require('path');
 
+const upload = multer({ dest: 'uploads/' });
 
 const app = express();
 app.use(helmet());
@@ -27,6 +30,17 @@ app.use('/users', require('./router/user-router'));
 app.use('/restaurants', require('./router/restaurant-router'));
 app.use('/menu-items', require('./router/menu-item-router'));
 app.use('/orders', require('./router/order-router'));
+// for uploading restaurant and menu item images
+app.post('/upload', upload.single('image'), (req, res) => {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+    const filename = req.file.filename;
+    const originalname = req.file.originalname;
+    const mimetype = req.file.mimetype;
+    const size = req.file.size;
+    res.json({ filename, originalname, mimetype, size });
+  });
 
 // error handler. 
 app.use(errorHandler);

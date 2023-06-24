@@ -8,6 +8,7 @@ function model(sequelize) {
         user_id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
         first_name: { type: DataTypes.STRING, allowNull: false },
         last_name: { type: DataTypes.STRING, allowNull: false },
+        location: { type: DataTypes.STRING },
         telephone: { type: DataTypes.STRING, allowNull: false  },
         status: { type: DataTypes.STRING, defaultValue: "not varified"  },
         role: { type: DataTypes.STRING, defaultValue: ROLES_LIST.User  },
