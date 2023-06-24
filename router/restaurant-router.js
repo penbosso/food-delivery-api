@@ -29,7 +29,7 @@ const restaurantSchema = (req, res, next) => {
  */
 const createRestaurant = (req, res, next) => {
     restaurantController.create(req.body)
-        .then(() => res.json({ message: 'Restaurant created successfully' }))
+        .then((restaurant) => res.status(201).json(restaurant))
         .catch(next);
 }
 
@@ -59,7 +59,7 @@ const updateRestaurant = (req, res, next) => {
 
 const deleteRestaurant = (req, res, next) => {
     restaurantController.delete(req.params.id)
-        .then(() => res.json({ message: 'Restaurant deleted successfully' }))
+        .then(() => res.status(204).json({ message: 'Restaurant deleted successfully' }))
         .catch(next)
 }
 

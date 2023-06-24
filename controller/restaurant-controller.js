@@ -26,7 +26,7 @@ const getAll = async () => {
  * @returns {Promise} A promise that resolves when the restaurant is created.
  */
 const create = async (params) => {
-    await db.Restaurant.create(params)
+    return await db.Restaurant.create(params)
 }
 
 /**

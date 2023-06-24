@@ -31,7 +31,7 @@ const orderSchema = (req, res, next) => {
  */
 const createOrder = (req, res, next) => {
     orderController.create(req.body)
-        .then(() => res.json({ message: 'Order created successfully' }))
+        .then((order) => res.status(201).json(order))
         .catch(next);
 }
 
@@ -84,7 +84,7 @@ const updateOrder = (req, res, next) => {
  */
 const deleteOrder = (req, res, next) => {
     orderController.delete(req.params.id)
-        .then(() => res.json({ message: 'Order deleted successfully' }))
+        .then(() => res.status(204).json({ message: 'Order deleted successfully' }))
         .catch(next)
 }
 

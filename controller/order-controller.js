@@ -34,7 +34,7 @@ const getAllByRestaurantId = async () => {
  * @returns {Promise} A promise that resolves when the order is created.
  */
 const create = async (params) => {
-    await db.Order.create(params)
+    return await db.Order.create(params)
 }
 
 /**

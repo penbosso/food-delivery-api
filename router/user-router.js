@@ -58,7 +58,7 @@ const addUserSchema = (req, res, next) => {
  */
 const register = (req, res, next) => {
     userController.createUser(req.body)
-        .then(() => res.json({ message: 'Registration successful' }))
+        .then((user) => res.status(201).json(user))
         .catch(next);
 };
 
@@ -128,7 +128,7 @@ Deletes a user.
 */
 const _delete = (req, res, next) => {
     userController.delete(req.params.id)
-        .then(() => res.json({ message: 'User deleted successfully' }))
+        .then(() => res.status(204).json({ message: 'User deleted successfully' }))
         .catch(next);
 };
 

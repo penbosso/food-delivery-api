@@ -3,6 +3,7 @@ const { Sequelize } = require('sequelize');
 const db = require('../db');
 const Op = Sequelize.Op;
 const bcrypt = require('bcryptjs');
+const { user } = require('../config/dbconfig');
 require('dotenv').config();
 
 const secret = process.env.SECRET;
@@ -70,7 +71,7 @@ const createUser = async (params) => {
     }
 
     // save user
-    await db.User.create(params);
+    return await db.User.create(params);
 };
 
 /**

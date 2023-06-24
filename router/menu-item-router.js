@@ -32,7 +32,7 @@ const menu_itemSchema = (req, res, next) => {
  */
 const createMenu_item = (req, res, next) => {
     menu_itemController.create(req.body)
-        .then(() => res.json({ message: 'Menu_item created successfully' }))
+        .then((item) => res.status(201).json(item))
         .catch(next);
 }
 
@@ -85,7 +85,7 @@ const updateMenu_item = (req, res, next) => {
  */
 const deleteMenu_item = (req, res, next) => {
     menu_itemController.delete(req.params.id)
-        .then(() => res.json({ message: 'Menu_item deleted successfully' }))
+        .then(() => res.status(204).json({ message: 'Menu_item deleted successfully' }))
         .catch(next)
 }
 

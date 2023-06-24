@@ -33,7 +33,7 @@ const getAll = async () => {
  * @returns {Promise} A promise that resolves when the menu_item is created.
  */
 const create = async (params) => {
-    await db.Menu_item.create(params)
+    return await db.Menu_item.create(params)
 }
 
 /**
