@@ -12,14 +12,15 @@ const app = express();
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(cors({ credentials: true, origin: true, }));
+
+
 app.use(morgan('combined', {
-    stream: fs.createWriteStream('./logs/access.log', {flags: 'a'})
+    stream: fs.createWriteStream('./logs/access.log', { flags: 'a' })
 }));
-app.use(morgan('combined'));
 
 // api routes.
 app.get('/', (req, res) => {
-  res.send({ message: 'Food delivery API works!'});
+    res.send({ message: 'Food delivery API works!' });
 });
 
 app.use('/users', require('./router/user-router'));
@@ -32,3 +33,5 @@ app.use(errorHandler);
 
 const port = (process.env.PORT || 4000);
 app.listen(port, () => console.log('Server listening on port ' + port));
+
+module.exports = app;
