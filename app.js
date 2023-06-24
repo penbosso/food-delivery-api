@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
 app.use('/users', require('./router/user-router'));
 app.use('/restaurants', require('./router/restaurant-router'));
 app.use('/menu-items', require('./router/menu-item-router'));
+app.use('/orders', require('./router/order-router'));
 
 // error handler. 
 app.use(errorHandler);
